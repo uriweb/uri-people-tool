@@ -63,7 +63,7 @@ function uri_people_tool_get_people($args) {
 		'orderby' => array( 'meta_value' => 'ASC', 'date' => 'DESC' ),
 	);
 
-	// check for a posts per page value
+	// check for a numeric posts_per_page value
 	if ( $args['posts_per_page'] && is_numeric( $args['posts_per_page'] ) ) {
 		$default_args['posts_per_page'] = $args['posts_per_page'];
 	}
@@ -78,7 +78,7 @@ function uri_people_tool_get_people($args) {
 				array(
 					'taxonomy' => 'peoplegroups',
 					'field' => 'id',
-					'terms' => $term[0]->term_id
+					'terms' => $term_id
 				)
 			);
 		}
