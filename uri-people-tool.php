@@ -199,10 +199,11 @@ function uri_people_tool_get_template( $template_name, $args = array(), $tempate
  */
 function uri_people_tool_template_loader( $template ) {
 	
-	if ( get_post_type() === 'people' ) {
+	if ( is_single() && get_post_type() === 'people' ) {
 	
 		// if it's a people page, then override $template with the custom one
-		$file = 'post-person.php';
+		// use "people" instead of "person" for backwards compatability.
+		$file = 'single-people.php';
 
 		if ( file_exists( uri_people_tool_locate_template( $file ) ) ) {
 			$template = uri_people_tool_locate_template( $file );
