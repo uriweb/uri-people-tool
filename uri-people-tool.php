@@ -15,7 +15,7 @@ if ( !defined('ABSPATH') )
 
 /**
  * Create a shortcode for querying people.
- * The shortcode accepts one argument: the category slug
+ * The shortcode accepts arguments: group (the category slug), posts_per_page
  * e.g. [uri-people-tool group="faculty"]
  */
 function uri_people_tool_shortcode($attributes, $content, $shortcode) {
@@ -25,6 +25,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     // default attributes
     $attributes = shortcode_atts(array(
 			'group' => 'faculty', // slug, slug2, slug3
+			'posts_per_page' => -1,
     ), $attributes, $shortcode);
     
 		ob_start();
@@ -46,10 +47,26 @@ function uri_people_tool_get_people($args) {
 
 	$default_args = array(
 		'post_type' => 'people',
-		'posts_per_page' => -1,
 		'order' => 'DESC',
-		'orderby' => array('date' => 'DESC' ),
+		'meta_query' => array(
+			'relation' => 'AND',
+			array(
+				'key' => 'sortname',
+				'compare' => 'EXISTS'
+			),
+			array(
+				'key' => 'sortname',
+				'compare' => '!=',
+				'value' => ''
+			),
+		),
+		'orderby' => array( 'meta_value' => 'ASC', 'date' => 'DESC' ),
 	);
+
+	// check for a posts per page value
+	if ( $args['posts_per_page'] && is_numeric( $args['posts_per_page'] ) ) {
+		$default_args['posts_per_page'] = $args['posts_per_page'];
+	}
 
 	// we have a group, get its id and limit query to just the specified group
 	if ( $args['group'] ) {
