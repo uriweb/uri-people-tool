@@ -12,11 +12,10 @@ if ( !defined('ABSPATH') )
 /**
  * Register field groups
  * The register_field_group function accepts 1 array which holds the relevant data to register a field group
- * You may edit the array as you see fit. However, this may result in errors if the array is not compatible with ACF
- * This code must run every time the functions.php file is read
  */
 
 if(function_exists('register_field_group')) {
+
 	register_field_group(array (
 		'id' => '502a639e579f1',
 		'title' => 'People',
@@ -197,76 +196,4 @@ if(function_exists('register_field_group')) {
 	));
 	
 
-	
-	register_field_group(array (
-		'id' => '502a639e58574',
-		'title' => 'People Options',
-		'fields' => array (
-			0 => array (
-				'label' => 'People Category',
-				'name' => 'peoplecat',
-				'type' => 'text',
-				'instructions' => 'For use when limiting the people page template to one or more specific people groups. Use the desired people group slug. Separate multiple groups with a space between slugs',
-				'required' => '0',
-				'default_value' => '',
-				'formatting' => 'none',
-				'key' => 'field_502a636e3a5d7',
-				'order_no' => '0',
-			),
-		),
-		'location' => array (
-			'rules' => array (
-				0 => array (
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'page',
-					'order_no' => '0',
-				),
-			),
-			'allorany' => 'all',
-		),
-		'options' => array (
-			'position' => 'normal',
-			'layout' => 'default',
-			'hide_on_screen' => array (),
-		),
-		'menu_order' => 0,
-	));
-	
-	
-	
-	register_field_group(array (
-		'id' => '506ae97f314e0',
-		'title' => 'People Sorting',
-		'fields' => array (
-			0 => array (
-				'label' => 'Sort People',
-				'name' => 'peoplesort',
-				'type' => 'true_false',
-				'instructions' => '',
-				'required' => '0',
-				'message' => 'When checked, the people page will be sorted into groups.',
-				'key' => 'field_506ae96a8e2f5',
-				'order_no' => '0',
-			),
-		),
-		'location' => array (
-			'rules' => array (
-				0 => array (
-					'param' => 'post_type',
-					'operator' => '==',
-					'value' => 'page',
-					'order_no' => '0',
-				),
-			),
-			'allorany' => 'all',
-		),
-		'options' => array (
-			'position' => 'side',
-			'layout' => 'default',
-			'hide_on_screen' => 
-			array (),
-		),
-		'menu_order' => 0,
-	));
 }

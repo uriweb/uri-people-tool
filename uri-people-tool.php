@@ -14,20 +14,19 @@ if ( !defined('ABSPATH') )
 
 
 /**
- * 
+ * Create a shortcode for querying people.
+ * The shortcode accepts one argument: the category slug
+ * e.g. [uri-people-tool group="faculty"]
  */
 function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     // normalize attribute keys, lowercase
     $attributes = array_change_key_case((array)$attributes, CASE_LOWER);
     
- 
-    // override default attributes with user attributes
+    // default attributes
     $attributes = shortcode_atts(array(
-			'title' => 'People', // slug, slug2, slug3
+			'group' => 'faculty', // slug, slug2, slug3
     ), $attributes, $shortcode);
-
-		//echo '<pre>', print_r($attributes, TRUE), '</pre>';
-
+    
 		ob_start();
 		uri_people_tool_get_people($attributes);
 		$output = ob_get_clean();
@@ -51,8 +50,26 @@ function uri_people_tool_get_people($args) {
 		'order' => 'DESC',
 		'orderby' => array('date' => 'DESC' ),
 	);
-	// @todo: allow custom shortcode attributes to modify the $default_args
 
+	// we have a group, get its id and limit query to just the specified group
+	if ( $args['group'] ) {
+		// get the term's id
+		$term = get_terms( 'peoplegroups', 'hide_empty=1&slug=' . sanitize_title( $args['group'] ) );
+		$term_id = $term[0]->term_id;
+		if ( $term_id ) {
+			$default_args['tax_query'] = array(
+				array(
+					'taxonomy' => 'peoplegroups',
+					'field' => 'id',
+					'terms' => $term[0]->term_id
+				)
+			);
+		}
+	}
+
+// 	echo '<pre>';
+// 	var_dump( $args );
+// 	echo '</pre>';
 	
 	$loop = new WP_Query( $default_args );
 	
