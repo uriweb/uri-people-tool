@@ -25,9 +25,9 @@
 	</div>
 	<div class="inside">
 		<?php if ( has_post_thumbnail() ) : ?>
-		<a href="<?php the_permalink() ?>"><?php the_post_thumbnail('people-thumb', array( 'class' => 'u-photo' )); ?></a>
-		<?php else : ?>
-		<a href="<?php the_permalink() ?>"><img src="<?php echo esc_url( get_stylesheet_directory_uri() ); ?>/images/default/uri80.gif" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" /></a>
+			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail('people-thumb', array( 'class' => 'u-photo' )); ?></a>
+			<?php else : ?>
+			<a href="<?php the_permalink() ?>"><img class="aaanonymous" src="<?php echo plugin_dir_url( __FILE__ ); ?>/aaanonymous.png" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" /></a>
 		<?php endif; ?>
 
 		<p><?php the_field('peopletitle'); ?></p>
