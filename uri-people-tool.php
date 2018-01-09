@@ -15,7 +15,7 @@ if ( !defined('ABSPATH') )
 
 /**
  * Create a shortcode for querying people.
- * The shortcode accepts arguments: group (the category slug), posts_per_page
+ * The shortcode accepts arguments: group (the category slug), posts_per_page, before, after
  * e.g. [uri-people-tool group="faculty"]
  */
 function uri_people_tool_shortcode($attributes, $content, $shortcode) {
@@ -26,6 +26,8 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     $attributes = shortcode_atts(array(
 			'group' => 'faculty', // slug, slug2, slug3
 			'posts_per_page' => -1,
+			'before' => '<div class="uri-people-tool">',
+			'after' => '</div>',
     ), $attributes, $shortcode);
     
 		ob_start();
@@ -89,19 +91,18 @@ function uri_people_tool_get_people($args) {
 // 	echo '</pre>';
 	
 	$loop = new WP_Query( $default_args );
-	
-// 	echo '<pre>';
-// 	var_dump( $loop );
-// 	echo '</pre>';
-
 	$i = 0;
+	
+	echo html_entity_decode( $args['before'] );
+	
 	while ($loop->have_posts()) {
 		$i++;
 		$loop->the_post();	
 		uri_people_tool_get_template( 'person-card.php' );
-	}
-	
+	}	
 	wp_reset_postdata();
+	
+	echo html_entity_decode ( $args['after'] );
 
 }
 
