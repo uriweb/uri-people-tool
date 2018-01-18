@@ -276,3 +276,6 @@ add_action('init', 'uri_people_tool_post_type_maker');
 
 // require the individual field definitions from a different file
 require_once dirname(__FILE__) . '/inc/uri-people-fields.php';
+
+// extend WordPress search to include metadata
+require_once dirname(__FILE__) . '/inc/uri-people-extend-search.php';
