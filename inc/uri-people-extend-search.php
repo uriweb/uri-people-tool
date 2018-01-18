@@ -19,7 +19,6 @@ function uri_people_tool_search_join( $join ) {
 	global $wpdb;
 
 	if ( is_search() ) {
-		echo 'hi';
 		$join .= ' LEFT JOIN ' . $wpdb->postmeta . ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
 	}
 
