@@ -13,6 +13,12 @@ if ( !defined('ABSPATH') )
 	die('-1');
 
 
+function uri_people_tool_enqueue() {
+	wp_enqueue_style( 'uri-people-styles', plugins_url( 'assets/people.css', __FILE__ ) );
+}
+add_action( 'wp_enqueue_scripts', 'uri_people_tool_enqueue' );
+
+
 /**
  * Create a shortcode for querying people.
  * The shortcode accepts arguments: group (the category slug), posts_per_page, before, after

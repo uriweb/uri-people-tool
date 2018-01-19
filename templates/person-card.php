@@ -1,4 +1,8 @@
 <?php
+/**
+ * This mucky HTML is to match the department theme
+ * @todo: modernize this.
+ */
 
 	// put together a string of miscellaneous custom fields
 	$misc = array();
@@ -20,22 +24,27 @@
 	$misc = implode( ' &ndash; ', $misc );
 	
 ?><div class="peopleitem h-card">
-	<div class="header">
-		<h3 class="p-name"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
-	</div>
+	<header>
+		<div class="header">
+			<h3 class="p-name"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
+		</div>
+	</header>
 	<div class="inside">
+		<figure>
 		<?php if ( has_post_thumbnail() ) : ?>
 			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail('people-thumb', array( 'class' => 'u-photo' )); ?></a>
 			<?php else : ?>
-			<a href="<?php the_permalink() ?>"><img class="aaanonymous" src="<?php echo plugin_dir_url( __FILE__ ); ?>/aaanonymous.png" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" /></a>
+			<a href="<?php the_permalink() ?>"><img class="anonymous" src="<?php echo plugin_dir_url( __FILE__ ); ?>/
+			anonymous.png" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" /></a>
 		<?php endif; ?>
+		</figure>
 
-		<p><?php the_field('peopletitle'); ?></p>
+		<p class="people-title"><?php the_field('peopletitle'); ?></p>
 		
 		<p class="people-department"><?php the_field('peopledepartment'); ?></p>
 
 		<?php if(!empty( $misc )): ?>
-			<p><?php print $misc ?></p>
+			<p class="people-misc"><?php print $misc ?></p>
 		<?php endif; ?>
 
 		<div style="clear:both;"></div>

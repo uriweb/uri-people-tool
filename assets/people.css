@@ -1,0 +1,23 @@
+.peopleitem {
+	background: #eee;
+	border-radius: 2px;
+	margin-bottom: 1.5rem;
+	padding: 1rem;
+}
+
+.peopleitem p {
+	padding-bottom: 0;
+}
+
+.peopleitem figure {
+	display: block;
+	float: left;
+	margin-right: 1rem;
+}
+
+/**
+ * Legacy Department Theme Compatibility Styles
+ */
+.grids .peopleitem {
+	padding: 0;
+}
