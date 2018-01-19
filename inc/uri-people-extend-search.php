@@ -36,7 +36,7 @@ function uri_people_tool_filter_search_and_filter( $query_args, $sfid ) {
 	
 	return $query_args;
 }
-add_filter( 'sf_edit_query_args', 'uri_people_tool_filter_search_and_filter', 20, 2 );
+//add_filter( 'sf_edit_query_args', 'uri_people_tool_filter_search_and_filter', 20, 2 );
 
 
 /**
