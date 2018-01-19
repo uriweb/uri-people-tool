@@ -8,6 +8,37 @@
 
 
 
+function uri_people_tool_filter_search_and_filter( $query_args, $sfid ) {
+	
+// 	$query_args['meta_key'] = 'peoplebio';
+// 	$query_args['meta_value'] = 'geriatrics';
+// 	$query_args['meta_compare'] = 'LIKE';
+	
+	
+	$query_args['meta_query'] = array(
+		'relation' => 'OR',
+		array(
+			'key' => 'peoplerresearch',
+			'value' => 'geriatrics',
+			'compare' => 'LIKE',
+		),
+		array(
+			'key' => 'peoplerbio',
+			'value' => 'geriatrics',
+			'compare' => 'LIKE',
+		)
+	);
+	
+
+// 	echo '<pre>';
+// 	var_dump($query_args);
+// 	echo '</pre>';
+	
+	return $query_args;
+}
+add_filter( 'sf_edit_query_args', 'uri_people_tool_filter_search_and_filter', 20, 2 );
+
+
 /**
  * Join posts and postmeta tables
  * NOTE: This joins any post meta table associated with the post, and it may be overkill

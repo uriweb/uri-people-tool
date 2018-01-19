@@ -237,7 +237,7 @@ function uri_people_tool_post_type_maker() {
 		'query_var' => true,
 		'has_archive' => true,
 		'exclude_from_search' => false,
-		'supports' => array('title','thumbnail','revisions'),
+		'supports' => array('title','thumbnail','revisions','author'), // perhaps 'editor', 'excerpt'
 		'labels' => array (
 			'name' => 'People',
 			'singular_name' => 'Person',
