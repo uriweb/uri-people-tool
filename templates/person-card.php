@@ -32,10 +32,7 @@
 	<div class="inside">
 		<figure>
 		<?php if ( has_post_thumbnail() ) : ?>
-			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail('people-thumb', array( 'class' => 'u-photo' )); ?></a>
-			<?php else : ?>
-			<a href="<?php the_permalink() ?>"><img class="anonymous" src="<?php echo plugin_dir_url( __FILE__ ); ?>/
-			anonymous.png" alt="<?php the_title(); ?>" title="<?php the_title(); ?>" /></a>
+			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail('people-thumb', array( 'class' => 'u-photo people-thumb' )); ?></a>
 		<?php endif; ?>
 		</figure>
 

@@ -52,7 +52,7 @@ function uri_people_tool_search_join( $join ) {
 	if ( is_search() ) {
 		$join .= ' LEFT JOIN ' . $wpdb->postmeta . ' ON '. $wpdb->posts . '.ID = ' . $wpdb->postmeta . '.post_id ';
 	}
-
+	
 	return $join;
 }
 add_filter('posts_join', 'uri_people_tool_search_join' );
@@ -65,7 +65,7 @@ add_filter('posts_join', 'uri_people_tool_search_join' );
  * http://codex.wordpress.org/Plugin_API/Filter_Reference/posts_where
  */
 function uri_people_tool_search_where( $where ) {
-	global $pagenow, $wpdb;
+	global $wpdb;
 
 	if ( is_search() ) {
 		$where = preg_replace(
