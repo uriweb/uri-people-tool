@@ -70,6 +70,7 @@ function uri_people_tool_get_people($args) {
 				'value' => ''
 			),
 		),
+
 		'orderby' => array( 'meta_value' => 'ASC', 'date' => 'DESC' ),
 	);
 
@@ -81,34 +82,59 @@ function uri_people_tool_get_people($args) {
 	// we have a group, get its id and limit query to just the specified group
 	if ( $args['group'] ) {
 		// get the term's id
+		$term_id = NULL;
 		$term = get_terms( 'peoplegroups', 'hide_empty=1&slug=' . sanitize_title( $args['group'] ) );
 		$term_id = $term[0]->term_id;
-		if ( $term_id ) {
-			$default_args['tax_query'] = array(
-				array(
-					'taxonomy' => 'peoplegroups',
-					'field' => 'id',
-					'terms' => $term_id
-				)
-			);
-		}
+
+		$default_args['tax_query'] = array(
+			array(
+				'taxonomy' => 'peoplegroups',
+				'field' => 'id',
+				'terms' => $term_id
+			)
+		);
 	}
 
-// 	echo '<pre>';
-// 	var_dump( $args );
-// 	echo '</pre>';
-	
+	echo html_entity_decode( $args['before'] );
+
+	// kinda hacky... due to a WPQuery limitation
+	// first, query the people with a sortname
 	$loop = new WP_Query( $default_args );
 	$i = 0;
 	
-	echo html_entity_decode( $args['before'] );
-	
 	while ($loop->have_posts()) {
 		$i++;
-		$loop->the_post();	
+		$loop->the_post();
 		uri_people_tool_get_template( 'person-card.php' );
 	}	
 	wp_reset_postdata();
+	
+
+	// second, query the people without a sortname
+	$default_args['meta_query'] = array(
+			'relation' => 'OR',
+			array(
+				'key' => 'sortname',
+				'compare' => 'NOT EXISTS'
+			),
+			array(
+				'key' => 'sortname',
+				'compare' => '=',
+				'value' => ''
+			),
+		);
+	$default_args['orderby'] = array( 'date' => 'DESC' );
+
+	$loop = new WP_Query( $default_args );
+	$i = 0;
+	
+	while ($loop->have_posts()) {
+		$i++;
+		$loop->the_post();
+		uri_people_tool_get_template( 'person-card.php' );
+	}	
+	wp_reset_postdata();
+
 	
 	echo html_entity_decode ( $args['after'] );
 
