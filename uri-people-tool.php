@@ -3,7 +3,7 @@
 Plugin Name: URI People Tool
 Plugin URI: http://www.uri.edu
 Description: Create custom post types for WordPress Department Sites
-Version: 0.3
+Version: 0.4
 Author: John Pennypacker
 Author URI: 
 */
@@ -11,6 +11,8 @@ Author URI:
 // Block direct requests
 if ( !defined('ABSPATH') )
 	die('-1');
+
+define( 'URI_PEOPLE_TOOL_PATH', plugin_dir_path( __FILE__ ) );
 
 
 function uri_people_tool_enqueue() {
@@ -68,6 +70,7 @@ function uri_people_tool_get_people($args) {
 				'value' => ''
 			),
 		),
+
 		'orderby' => array( 'meta_value' => 'ASC', 'date' => 'DESC' ),
 	);
 
@@ -79,151 +82,63 @@ function uri_people_tool_get_people($args) {
 	// we have a group, get its id and limit query to just the specified group
 	if ( $args['group'] ) {
 		// get the term's id
+		$term_id = NULL;
 		$term = get_terms( 'peoplegroups', 'hide_empty=1&slug=' . sanitize_title( $args['group'] ) );
 		$term_id = $term[0]->term_id;
-		if ( $term_id ) {
-			$default_args['tax_query'] = array(
-				array(
-					'taxonomy' => 'peoplegroups',
-					'field' => 'id',
-					'terms' => $term_id
-				)
-			);
-		}
+
+		$default_args['tax_query'] = array(
+			array(
+				'taxonomy' => 'peoplegroups',
+				'field' => 'id',
+				'terms' => $term_id
+			)
+		);
 	}
 
-// 	echo '<pre>';
-// 	var_dump( $args );
-// 	echo '</pre>';
-	
+	echo html_entity_decode( $args['before'] );
+
+	// kinda hacky... due to a WPQuery limitation
+	// first, query the people with a sortname
 	$loop = new WP_Query( $default_args );
 	$i = 0;
 	
-	echo html_entity_decode( $args['before'] );
-	
 	while ($loop->have_posts()) {
 		$i++;
-		$loop->the_post();	
+		$loop->the_post();
 		uri_people_tool_get_template( 'person-card.php' );
 	}	
 	wp_reset_postdata();
 	
+
+	// second, query the people without a sortname
+	$default_args['meta_query'] = array(
+			'relation' => 'OR',
+			array(
+				'key' => 'sortname',
+				'compare' => 'NOT EXISTS'
+			),
+			array(
+				'key' => 'sortname',
+				'compare' => '=',
+				'value' => ''
+			),
+		);
+	$default_args['orderby'] = array( 'date' => 'DESC' );
+
+	$loop = new WP_Query( $default_args );
+	$i = 0;
+	
+	while ($loop->have_posts()) {
+		$i++;
+		$loop->the_post();
+		uri_people_tool_get_template( 'person-card.php' );
+	}	
+	wp_reset_postdata();
+
+	
 	echo html_entity_decode ( $args['after'] );
 
 }
-
-
-/**
- * Locate page template.
- *
- * Locate the called template.
- * Search Order:
- * 1. /themes/theme/templates/$template_name
- * 2. /themes/theme/$template_name
- * 3. /plugins/uri-people-tool/templates/$template_name.
- *
- * http://jeroensormani.com/how-to-add-template-files-in-your-plugin/
- *
- * @param 	string 	$template_name			Template to load.
- * @param 	string 	$string $template_path	Path to templates.
- * @param 	string	$default_path			Default path to template files.
- * @return 	string	Path to the template file.
- */
-function uri_people_tool_locate_template( $template_name, $template_path = '', $default_path = '' ) {
-
-// 	echo '<pre>Template Name: ';
-// 	var_dump( $template_name );
-// 	echo '</pre>';
-
-	// Set variable to search in woocommerce-plugin-templates folder of theme.
-	if ( ! $template_path ) :
-		$template_path = 'templates/';
-	endif;
-
-	// Set default plugin templates path.
-	if ( ! $default_path ) :
-		$default_path = plugin_dir_path( __FILE__ ) . 'templates/'; // Path to the template folder
-	endif;
-
-	// Search template file in theme folder.
-	$template = locate_template( array(
-		$template_path . $template_name,
-		$template_name
-	) );
-
-	// Get plugins template file.
-	if ( ! $template ) :
-		$template = $default_path . $template_name;
-	endif;
-
-	return apply_filters( 'uri_people_tool_locate_template', $template, $template_name, $template_path, $default_path );
-
-}
-
-/**
- * Get template.
- *
- * Search for the template and include the file.
- *
- * @since 1.0.0
- *
- * @see wcpt_locate_template()
- *
- * @param string 	$template_name			Template to load.
- * @param array 	$args					Args passed for the template file.
- * @param string 	$string $template_path	Path to templates.
- * @param string	$default_path			Default path to template files.
- */
-function uri_people_tool_get_template( $template_name, $args = array(), $tempate_path = '', $default_path = '' ) {
-
-	if ( is_array( $args ) && isset( $args ) ) :
-		extract( $args );
-	endif;
-
-	$template_file = uri_people_tool_locate_template( $template_name, $tempate_path, $default_path );
-
-	if ( ! file_exists( $template_file ) ) :
-		_doing_it_wrong( __FUNCTION__, sprintf( '<code>%s</code> does not exist.', $template_file ), '1.0.0' );
-		return;
-	endif;
-
-
-	include $template_file;
-
-}
-
-
-/**
- * Template loader.
- *
- * The template loader will check if WP is loading a template
- * for a specific Post Type and will try to load the template
- * from out 'templates' directory.
- *
- *
- * @param	string	$template	Template file that is being loaded.
- * @return	string				Template file that should be loaded.
- */
-function uri_people_tool_template_loader( $template ) {
-	
-	if ( is_single() && get_post_type() === 'people' ) {
-	
-		// if it's a people page, then override $template with the custom one
-		// use "people" instead of "person" for backwards compatability.
-		$file = 'single-people.php';
-
-		if ( file_exists( uri_people_tool_locate_template( $file ) ) ) {
-			$template = uri_people_tool_locate_template( $file );
-		}
-
-	}
-
-	return $template;
-
-}
-add_filter( 'template_include', 'uri_people_tool_template_loader', 99 );
-
-
 
 
 /**
@@ -285,3 +200,6 @@ require_once dirname(__FILE__) . '/inc/uri-people-fields.php';
 
 // extend WordPress search to include metadata
 require_once dirname(__FILE__) . '/inc/uri-people-extend-search.php';
+
+// require the templating functions
+require_once dirname(__FILE__) . '/inc/uri-people-templating.php';
