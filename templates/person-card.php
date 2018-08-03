@@ -31,11 +31,11 @@
 		</div>
 	</header>
 	<div class="inside">
-		<figure>
 		<?php if ( ! empty( $args['thumbnail'] ) && has_post_thumbnail() ) : ?>
+		<figure>
 			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail( $args['thumbnail'], array( 'class' => 'u-photo ' . $args['thumbnail'] )); ?></a>
-		<?php endif; ?>
 		</figure>
+		<?php endif; ?>
 
 		<p class="people-title"><?php the_field('peopletitle'); ?></p>
 		
