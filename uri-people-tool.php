@@ -34,6 +34,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     $attributes = shortcode_atts(array(
 			'group' => 'faculty', // slug, slug2, slug3
 			'posts_per_page' => -1,
+			'thumbnail' => 'people-thumb',
 			'before' => '<div class="uri-people-tool">',
 			'after' => '</div>',
     ), $attributes, $shortcode);
@@ -105,7 +106,7 @@ function uri_people_tool_get_people($args) {
 	while ($loop->have_posts()) {
 		$i++;
 		$loop->the_post();
-		uri_people_tool_get_template( 'person-card.php' );
+		uri_people_tool_get_template( 'person-card.php', $args );
 	}	
 	wp_reset_postdata();
 	

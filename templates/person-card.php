@@ -22,7 +22,8 @@
 	*/
 	
 	$misc = implode( ' &ndash; ', $misc );
-	
+
+
 ?><div class="peopleitem h-card">
 	<header>
 		<div class="header">
@@ -32,7 +33,7 @@
 	<div class="inside">
 		<figure>
 		<?php if ( has_post_thumbnail() ) : ?>
-			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail('people-thumb', array( 'class' => 'u-photo people-thumb' )); ?></a>
+			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail( $args['thumb'], array( 'class' => 'u-photo people-thumb' )); ?></a>
 		<?php endif; ?>
 		</figure>
 
