@@ -100,15 +100,7 @@ function uri_people_tool_get_people($args) {
 
 	// kinda hacky... due to a WPQuery limitation
 	// first, query the people with a sortname
-	$loop = new WP_Query( $default_args );
-	$i = 0;
-	
-	while ($loop->have_posts()) {
-		$i++;
-		$loop->the_post();
-		uri_people_tool_get_template( 'person-card.php', $args );
-	}	
-	wp_reset_postdata();
+	uri_people_tool_loop( $default_args, $args );
 	
 
 	// second, query the people without a sortname
@@ -125,21 +117,30 @@ function uri_people_tool_get_people($args) {
 			),
 		);
 	$default_args['orderby'] = array( 'date' => 'DESC' );
-
-	$loop = new WP_Query( $default_args );
-	$i = 0;
 	
-	while ($loop->have_posts()) {
-		$i++;
-		$loop->the_post();
-		uri_people_tool_get_template( 'person-card.php' );
-	}	
-	wp_reset_postdata();
+	uri_people_tool_loop( $default_args, $args );
 
-	
 	echo html_entity_decode ( $args['after'] );
 
 }
+
+
+
+/**
+ * Query and loop over people
+ */
+function uri_people_tool_loop( $query_args, $short_code_args ) {
+	$loop = new WP_Query( $query_args );
+	$i = 0;
+
+	while ($loop->have_posts()) {
+		$i++;
+		$loop->the_post();
+		uri_people_tool_get_template( 'person-card.php', $short_code_args );
+	}	
+	wp_reset_postdata();
+}
+
 
 
 /**
