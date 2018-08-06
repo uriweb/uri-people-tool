@@ -36,22 +36,24 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
 			'posts_per_page' => 200,
 			'thumbnail' => 'people-thumb',
 			'link' => TRUE, // link to the people post
-			'website' => FALSE, // display the person's website
 			'email' => TRUE, // display the person's email
 			'phone' => TRUE, // display the person's phone
+			'department' => TRUE, // display the person's phone
+			'address' => FALSE, // display the person's website
+			'website' => FALSE, // display the person's website
 			'before' => '<div class="uri-people-tool">',
 			'after' => '</div>',
     ), $attributes, $shortcode);
     
     // check the shortcode attributes for boolean falses, and convert from default if necessary
-    foreach( array('link', 'thumbnail') as $value ) {
+    foreach( array('link', 'email', 'phone', 'department', 'thumbnail') as $value ) {
 			if( strtolower( $attributes[$value] ) == 'false' ) {
 				$attributes[$value] = FALSE;
 			}
     }
 
     // check the shortcode attributes for boolean trues, and convert from default if necessary
-    foreach( array('website', 'email', 'phone') as $value ) {
+    foreach( array('address', 'website') as $value ) {
 			if( strtolower( $attributes[$value] ) == 'true' ) {
 				$attributes[$value] = TRUE;
 			}

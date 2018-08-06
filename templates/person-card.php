@@ -48,9 +48,15 @@
 	</header>
 	<div class="inside">
 
-		<p class="people-title"><?php the_field('peopletitle'); ?></p>
+		<p class="people-title p-job-title"><?php the_field('peopletitle'); ?></p>
 		
+		<?php if ( $args['department'] ) : ?>
 		<p class="people-department"><?php the_field('peopledepartment'); ?></p>
+		<?php endif; ?>
+
+		<?php if ( $args['address'] ) : ?>
+		<p class="people-address p-street-address"><?php the_field('peoplemail'); ?></p>
+		<?php endif; ?>
 
 		<?php if(!empty( $misc )): ?>
 			<p class="people-misc"><?php print $misc ?></p>

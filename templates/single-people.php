@@ -40,7 +40,7 @@
 					<?php } ?>
 
 					<?php if(get_field('peoplepubs')) { ?>
-						<h3>Publications</h3>
+						<h3>Selected Publications</h3>
 						<?php the_field('peoplepubs'); ?>
 					<?php } ?>
 
