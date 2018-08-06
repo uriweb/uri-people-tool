@@ -44,15 +44,15 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     ), $attributes, $shortcode);
     
     // check the shortcode attributes for boolean falses, and convert from default if necessary
-    foreach(array('link') as $value) {
-			if( $attributes[$value] == 0 || strtolower( $attributes[$value] ) == 'false' ) {
+    foreach( array('link', 'thumbnail') as $value ) {
+			if( strtolower( $attributes[$value] ) == 'false' ) {
 				$attributes[$value] = FALSE;
 			}
     }
 
     // check the shortcode attributes for boolean trues, and convert from default if necessary
-    foreach(array('website', 'email', 'phone') as $value) {
-			if( $attributes[$value] == 1 || strtolower( $attributes[$value] ) == 'true' ) {
+    foreach( array('website', 'email', 'phone') as $value ) {
+			if( strtolower( $attributes[$value] ) == 'true' ) {
 				$attributes[$value] = TRUE;
 			}
     }

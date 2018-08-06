@@ -4,7 +4,7 @@
  * @todo: modernize this.
  */
  
- 	$has_thumbnail = ( ! empty( $args['thumbnail'] ) && has_post_thumbnail() ) ? TRUE : FALSE;
+ 	$has_thumbnail = ( $args['thumbnail'] !== FALSE && has_post_thumbnail() ) ? TRUE : FALSE;
 
 	// put together a string of miscellaneous custom fields
 	$misc = array();
@@ -23,8 +23,6 @@
 
 	$misc = implode( ' &ndash; ', $misc );
 	
-//var_dump($args);
-//var_dump( ! $args['link'] );
 
 ?><div class="peopleitem h-card <?php if ( $has_thumbnail ) { echo 'has-thumbnail'; } ?>">
 	<header>
