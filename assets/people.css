@@ -40,12 +40,16 @@
 
 
 .thirds .peopleitem figure,
-.fourths .peopleitem figure {
-	margin: 0 0 1rem;
+.fourths .peopleitem figure,
+.fifths .peopleitem figure {
+	margin: -1rem -1rem 1rem;
 }
 .thirds .peopleitem .people-thumb,
-.fourths .peopleitem .people-thumb {
-	border-radius: 2px;
+.fourths .peopleitem .people-thumb,
+.fifths .peopleitem .people-thumb {
+	border-top-left-radius: 2px;
+	border-top-right-radius: 2px;
+	border-bottom-left-radius: 0;
 	display: block;
 	height: auto;
 	margin: 0;
