@@ -28,13 +28,18 @@ All of the options below are optional.
 
 ## Examples
 
-Display a list of people in a two column layout:
+Display a list of people in a "faculty" group in a two column layout:
 
 ```[uri-people-tool group="faculty" before='<div class="uri-people-tool cl-tiles halves">' after="</div>"]```
 
-Display a list of people in a three column layout, show street address but not department:
+Display a list of people in a "faculty" group as a three column layout, show street address and hide department:
 
 ```[uri-people-tool group="faculty" department="false" address="true" before='<div class="uri-people-tool cl-tiles thirds">' after="</div>"]```
+
+Display a list of all people without links to people posts:
+
+```[uri-people-tool link="false"]```
+
 
 ## Theming the output
 
