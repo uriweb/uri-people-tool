@@ -6,12 +6,9 @@
 	min-height: 200px;
 	padding: 1rem 1rem 0;
 }
-/*
-.peopleitem {
-	background: #eee;
-	box-shadow: none;
+.peopleitem.has-thumbnail {
+	min-height: 180px; /* the thumbnail has a negative margin */
 }
-*/
 
 .peopleitem p {
 	margin-bottom: 0;

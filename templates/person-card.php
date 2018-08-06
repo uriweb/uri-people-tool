@@ -3,6 +3,8 @@
  * This mucky HTML is to match the department theme
  * @todo: modernize this.
  */
+ 
+ 	$has_thumbnail = ( ! empty( $args['thumbnail'] ) && has_post_thumbnail() ) ? TRUE : FALSE;
 
 	// put together a string of miscellaneous custom fields
 	$misc = array();
@@ -24,10 +26,10 @@
 //var_dump($args);
 //var_dump( ! $args['link'] );
 
-?><div class="peopleitem h-card">
+?><div class="peopleitem h-card <?php if ( $has_thumbnail ) { echo 'has-thumbnail'; } ?>">
 	<header>
 		<div class="header">
-			<?php if ( ! empty( $args['thumbnail'] ) && has_post_thumbnail() ) : ?>
+			<?php if ( $has_thumbnail ) : ?>
 			<figure>
 				<?php if ( $args['link'] === TRUE ): ?>
 					<a href="<?php the_permalink() ?>"><?php the_post_thumbnail( $args['thumbnail'], array( 'class' => 'u-photo ' . $args['thumbnail'] )); ?></a>
