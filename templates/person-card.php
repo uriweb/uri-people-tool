@@ -7,35 +7,46 @@
 	// put together a string of miscellaneous custom fields
 	$misc = array();
 	
-	if(get_field('peoplephone')) {
+	if( $args['phone'] === TRUE && get_field('peoplephone') ) {
 		$misc[] = '<span class="p-tel">' . get_field('peoplephone') . '</span>';
 	}
-	if(get_field('peopleemail')) {
+	if( $args['email'] === TRUE && get_field('peopleemail') ) {
 		$misc[] = '<a class="u-email" href="mailto:' . get_field('peopleemail') . '">' . get_field('peopleemail') . '</a>';
 	}
 	
 	// uncomment the below to add website after phone and email
-	/*
-	if(get_field('peopleurl')) {
+	if( $args['website'] === TRUE && get_field('peopleurl') ) {
 		$misc[] = '<span class="u-url"><a href="' . get_field('peopleurl') . '">website</a></p>';
 	}
-	*/
-	
+
 	$misc = implode( ' &ndash; ', $misc );
 	
+//var_dump($args);
+//var_dump( ! $args['link'] );
 
 ?><div class="peopleitem h-card">
 	<header>
 		<div class="header">
-			<h3 class="p-name"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
+			<?php if ( ! empty( $args['thumbnail'] ) && has_post_thumbnail() ) : ?>
+			<figure>
+				<?php if ( $args['link'] === TRUE ): ?>
+					<a href="<?php the_permalink() ?>"><?php the_post_thumbnail( $args['thumbnail'], array( 'class' => 'u-photo ' . $args['thumbnail'] )); ?></a>
+				<?php else: ?>
+					<?php the_post_thumbnail( $args['thumbnail'], array( 'class' => 'u-photo ' . $args['thumbnail'] )); ?>
+				<?php endif; ?>
+			</figure>
+			<?php endif; ?>
+
+			<?php if ( $args['link'] === TRUE ): ?>
+				<h3 class="p-name"><a href="<?php the_permalink() ?>"><?php the_title(); ?></a></h3>
+			<?php else: ?>
+				<h3 class="p-name"><?php the_title(); ?></h3>
+			<?php endif; ?>
+
+			
 		</div>
 	</header>
 	<div class="inside">
-		<?php if ( ! empty( $args['thumbnail'] ) && has_post_thumbnail() ) : ?>
-		<figure>
-			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail( $args['thumbnail'], array( 'class' => 'u-photo ' . $args['thumbnail'] )); ?></a>
-		</figure>
-		<?php endif; ?>
 
 		<p class="people-title"><?php the_field('peopletitle'); ?></p>
 		

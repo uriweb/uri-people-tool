@@ -15,7 +15,12 @@ The base syntax for the shortcode is as follows: `[uri-people-tool]`.  There are
 All of the options below are optional.
 
 	# `group` expects the slug of a valid peoplegroup category.
-	# `posts_per_page` expects a whole number. It limits the results to the specified amount.
+	# `posts_per_page` expects a whole number. It limits the results to the specified amount. Default is 200
+	# `thumbnail` expects the name of an image format e.g. "medium" or "people-thumb."  Set to "false" to hide thumbnails.
+	# `link` controls whether or not the card lists link to posts.  Default is true, set to "false" to not link
+	# `website` controls whether or not to display the website on card lists (default: false)
+	# `email` controls whether or not to display the email address on card lists (default: true)
+	# `phone` controls whether or not to display the phone number on card lists (default: true)
 	# `before` allows HTML to be inserted before the list of people. It defaults to `<div class="uri-people-tool">`
 	# `after` allows HTML to be inserted after the list of people. It defaults to `</div>`
 

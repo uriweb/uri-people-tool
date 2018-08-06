@@ -1,12 +1,29 @@
 .peopleitem {
-	background: #eee;
+	background: #f5f5f5;
 	border-radius: 2px;
-	margin-bottom: 1.5rem;
-	padding: 1rem;
+	box-shadow: 0 0.1rem 0.3rem rgba(0,0,0,0.1);
+	margin-bottom: 2rem;
+	min-height: 200px;
+	padding: 1rem 1rem 0;
 }
+/*
+.peopleitem {
+	background: #eee;
+	box-shadow: none;
+}
+*/
 
 .peopleitem p {
+	margin-bottom: 0;
 	padding-bottom: 0;
+}
+
+.p-name {
+	font-size: 1.2rem;
+	margin-bottom: .5rem;
+}
+.people-title {
+	line-height: 1.5;
 }
 
 .peopleitem figure {
@@ -15,10 +32,13 @@
 	margin-right: 1rem;
 }
 
-.people-thumb {
-	max-width: 100px;
+.peopleitem .people-thumb {
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+	display: block;
 	height: auto;
-	margin-bottom: 1rem;
+	margin: -1rem 0 0 -1rem;
+	max-width: 200px;
 }
 
 /**
