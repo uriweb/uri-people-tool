@@ -38,6 +38,21 @@
 	max-width: 200px;
 }
 
+
+.thirds .peopleitem figure,
+.fourths .peopleitem figure {
+	margin: 0 0 1rem;
+}
+.thirds .peopleitem .people-thumb,
+.fourths .peopleitem .people-thumb {
+	border-radius: 2px;
+	display: block;
+	height: auto;
+	margin: 0;
+	max-width: 100%;
+}
+
+
 /**
  * Legacy Department Theme Compatibility Styles
  */
