@@ -26,6 +26,16 @@ All of the options below are optional.
 	# `before` allows HTML to be inserted before the list of people. It defaults to `<div class="uri-people-tool">`
 	# `after` allows HTML to be inserted after the list of people. It defaults to `</div>`
 
+## Examples
+
+Display a list of people in a two column layout:
+
+```[uri-people-tool group="faculty" before='<div class="uri-people-tool cl-tiles halves">' after="</div>"]```
+
+Display a list of people in a three column layout, show street address but not department:
+
+```[uri-people-tool group="faculty" department="false" address="true" before='<div class="uri-people-tool cl-tiles thirds">' after="</div>"]```
+
 ## Theming the output
 
 This plugin includes default templates. The templates will likely require customization to match your site's theme. To customize the templates, copy one or both of `uri-people-tool/templates/person-card.php` and `uri-people-tool/templates/single-people.php` to your theme's directory -- either into your theme's root, or into a directory in your theme called `templates`. `person-card` handles the shortcode output, and `single-people` handles the page view of each person.
