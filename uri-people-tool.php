@@ -2,8 +2,8 @@
 /*
 Plugin Name: URI People Tool
 Plugin URI: http://www.uri.edu
-Description: Create custom post types for WordPress Department Sites
-Version: 0.4
+Description: Create custom people post type for WordPress Department Sites
+Version: 0.5
 Author: John Pennypacker
 Author URI: 
 */
@@ -33,13 +33,34 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     // default attributes
     $attributes = shortcode_atts(array(
 			'group' => 'faculty', // slug, slug2, slug3
-			'posts_per_page' => -1,
+			'posts_per_page' => 200,
+			'thumbnail' => 'people-thumb',
+			'link' => TRUE, // link to the people post
+			'email' => TRUE, // display the person's email
+			'phone' => TRUE, // display the person's phone
+			'department' => TRUE, // display the person's phone
+			'address' => FALSE, // display the person's website
+			'website' => FALSE, // display the person's website
 			'before' => '<div class="uri-people-tool">',
 			'after' => '</div>',
     ), $attributes, $shortcode);
     
+    // check the shortcode attributes for boolean falses, and convert from default if necessary
+    foreach( array('link', 'email', 'phone', 'department', 'thumbnail') as $value ) {
+			if( strtolower( $attributes[$value] ) == 'false' ) {
+				$attributes[$value] = FALSE;
+			}
+    }
+
+    // check the shortcode attributes for boolean trues, and convert from default if necessary
+    foreach( array('address', 'website') as $value ) {
+			if( strtolower( $attributes[$value] ) == 'true' ) {
+				$attributes[$value] = TRUE;
+			}
+    }
+    
 		ob_start();
-		uri_people_tool_get_people($attributes);
+		uri_people_tool_get_people( $attributes );
 		$output = ob_get_clean();
 		return $output;
 		
@@ -99,15 +120,7 @@ function uri_people_tool_get_people($args) {
 
 	// kinda hacky... due to a WPQuery limitation
 	// first, query the people with a sortname
-	$loop = new WP_Query( $default_args );
-	$i = 0;
-	
-	while ($loop->have_posts()) {
-		$i++;
-		$loop->the_post();
-		uri_people_tool_get_template( 'person-card.php' );
-	}	
-	wp_reset_postdata();
+	uri_people_tool_loop( $default_args, $args );
 	
 
 	// second, query the people without a sortname
@@ -124,21 +137,30 @@ function uri_people_tool_get_people($args) {
 			),
 		);
 	$default_args['orderby'] = array( 'date' => 'DESC' );
-
-	$loop = new WP_Query( $default_args );
-	$i = 0;
 	
-	while ($loop->have_posts()) {
-		$i++;
-		$loop->the_post();
-		uri_people_tool_get_template( 'person-card.php' );
-	}	
-	wp_reset_postdata();
+	uri_people_tool_loop( $default_args, $args );
 
-	
 	echo html_entity_decode ( $args['after'] );
 
 }
+
+
+
+/**
+ * Query and loop over people
+ */
+function uri_people_tool_loop( $query_args, $short_code_args ) {
+	$loop = new WP_Query( $query_args );
+	$i = 0;
+
+	while ($loop->have_posts()) {
+		$i++;
+		$loop->the_post();
+		uri_people_tool_get_template( 'person-card.php', $short_code_args );
+	}	
+	wp_reset_postdata();
+}
+
 
 
 /**
@@ -158,7 +180,7 @@ function uri_people_tool_post_type_maker() {
 		'query_var' => true,
 		'has_archive' => true,
 		'exclude_from_search' => false,
-		'supports' => array('title','thumbnail','revisions','author'), // perhaps 'editor', 'excerpt'
+		'supports' => array('title','thumbnail','editor','revisions','author'), // perhaps 'editor', 'excerpt'
 		'labels' => array (
 			'name' => 'People',
 			'singular_name' => 'Person',
