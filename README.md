@@ -16,7 +16,7 @@ All of the options below are optional.
 
 	# `group` expects the slug of a valid peoplegroup category.
 	# `posts_per_page` expects a whole number. It limits the results to the specified amount. Default is 200
-	# `thumbnail` expects the name of an image format e.g. "medium" or "people-thumb."  Set to "false" to hide thumbnails.
+	# `thumbnail` expects the name of an image format e.g. "medium" or "peoplethumb."  Set to "false" to hide thumbnails.
 	# `link` controls whether or not the card lists link to posts.  Set to "false" to not link (default: true)
 	# `phone` controls whether or not to display the phone number on card lists (default: true)
 	# `department` controls whether or not to display the department on card lists (default: true)

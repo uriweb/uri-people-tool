@@ -23,13 +23,13 @@
 	line-height: 1.5;
 }
 
-.peopleitem figure {
+.peopleitem.has-thumbnail figure {
 	display: block;
 	float: left;
 	margin-right: 1rem;
 }
 
-.peopleitem .people-thumb {
+.peopleitem.has-thumbnail .peoplethumb {
 	border-top-left-radius: 2px;
 	border-bottom-left-radius: 2px;
 	display: block;
@@ -39,14 +39,14 @@
 }
 
 
-.thirds .peopleitem figure,
-.fourths .peopleitem figure,
-.fifths .peopleitem figure {
+.thirds .peopleitem.has-thumbnail figure,
+.fourths .peopleitem.has-thumbnail figure,
+.fifths .peopleitem.has-thumbnail figure {
 	margin: -1rem -1rem 1rem;
 }
-.thirds .peopleitem .people-thumb,
-.fourths .peopleitem .people-thumb,
-.fifths .peopleitem .people-thumb {
+.thirds .peopleitem.has-thumbnail .peoplethumb,
+.fourths .peopleitem.has-thumbnail .peoplethumb,
+.fifths .peopleitem.has-thumbnail .peoplethumb {
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
 	border-bottom-left-radius: 0;
