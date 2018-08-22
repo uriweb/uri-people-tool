@@ -3,7 +3,7 @@
 Plugin Name: URI People Tool
 Plugin URI: http://www.uri.edu
 Description: Create custom people post type for WordPress Department Sites
-Version: 0.5
+Version: 0.6
 Author: John Pennypacker
 Author URI: 
 */
@@ -34,7 +34,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     $attributes = shortcode_atts(array(
 			'group' => 'faculty', // slug, slug2, slug3
 			'posts_per_page' => 200,
-			'thumbnail' => 'people-thumb',
+			'thumbnail' => 'peoplethumb',
 			'link' => TRUE, // link to the people post
 			'email' => TRUE, // display the person's email
 			'phone' => TRUE, // display the person's phone
@@ -215,6 +215,15 @@ function uri_people_tool_post_type_maker() {
 
 }
 add_action('init', 'uri_people_tool_post_type_maker');
+
+
+/**
+ * Define a default image size for people thumbnails
+ */
+function uri_people_tool_theme_setup() {
+	add_image_size( 'peoplethumb', 200, 200 );
+}
+add_action( 'after_setup_theme', 'uri_people_tool_theme_setup' );
 
 
 // require the individual field definitions from a different file
