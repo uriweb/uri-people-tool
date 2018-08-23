@@ -29,31 +29,40 @@
 	margin-right: 1rem;
 }
 
-.peopleitem.has-thumbnail .peoplethumb {
-	border-top-left-radius: 2px;
-	border-bottom-left-radius: 2px;
+.peopleitem.has-thumbnail img {
+	height: auto;
+}
+
+.peopleitem.has-thumbnail img {
 	display: block;
 	height: auto;
-	margin: -1rem 0 0 -1rem;
-	max-width: 200px;
+	max-width: 100%;
 }
 
 
 .thirds .peopleitem.has-thumbnail figure,
 .fourths .peopleitem.has-thumbnail figure,
 .fifths .peopleitem.has-thumbnail figure {
+	float: none;
 	margin: -1rem -1rem 1rem;
 }
-.thirds .peopleitem.has-thumbnail .peoplethumb,
-.fourths .peopleitem.has-thumbnail .peoplethumb,
-.fifths .peopleitem.has-thumbnail .peoplethumb {
+
+.halves .peopleitem.has-thumbnail img {
+	border-top-left-radius: 2px;
+	border-bottom-left-radius: 2px;
+	margin: -1rem 0 0 -1rem;
+	max-width: 200px;
+}
+
+.thirds .peopleitem.has-thumbnail img,
+.fourths .peopleitem.has-thumbnail img,
+.fifths .peopleitem.has-thumbnail img {
 	border-top-left-radius: 2px;
 	border-top-right-radius: 2px;
 	border-bottom-left-radius: 0;
-	display: block;
 	height: auto;
 	margin: 0;
-	max-width: 100%;
+	width: 100%;
 }
 
 
