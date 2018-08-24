@@ -3,7 +3,7 @@
 Plugin Name: URI People Tool
 Plugin URI: http://www.uri.edu
 Description: Create custom people post type for WordPress Department Sites
-Version: 0.6
+Version: 1.0
 Author: John Pennypacker
 Author URI: 
 */
