@@ -1,10 +1,10 @@
 <?php
 /*
 Plugin Name: URI People Tool
-Plugin URI: http://www.uri.edu
+Plugin URI: 
 Description: Create custom people post type for WordPress Department Sites
 Version: 1.1
-Author: John Pennypacker
+Author: URI Web Communications
 Author URI: 
 */
 
@@ -174,6 +174,7 @@ function uri_people_tool_post_type_maker() {
 		'public' => true,
 		'show_ui' => true,
 		'show_in_menu' => true,
+		'show_in_rest' => true,
 		'capability_type' => 'post',
 		'hierarchical' => true,
 		'rewrite' => array('slug' => 'meet'),
