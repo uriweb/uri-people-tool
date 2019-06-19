@@ -33,6 +33,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     // default attributes
     $attributes = shortcode_atts(array(
 			'group' => 'faculty', // slug, slug2, slug3
+			'id' => 0,
 			'posts_per_page' => 200,
 			'thumbnail' => '',
 			'link' => TRUE, // link to the people post
@@ -220,6 +221,7 @@ function uri_people_tool_post_type_maker() {
 			'label' => 'People Groups',
 			'show_admin_column' => true,
 			'show_ui' => true,
+			'show_in_rest' => true,
 			'query_var' => true,
 			'rewrite' => array('slug' => 'person'),
 			'singular_label' => 'People Group'
