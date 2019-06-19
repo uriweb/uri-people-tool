@@ -206,6 +206,7 @@ function uri_people_tool_post_type_maker() {
 		), array(
 			'hierarchical' => true,
 			'label' => 'People Groups',
+			'show_admin_column' => true,
 			'show_ui' => true,
 			'query_var' => true,
 			'rewrite' => array('slug' => 'person'),
