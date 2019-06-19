@@ -161,7 +161,19 @@ function uri_people_tool_loop( $query_args, $short_code_args ) {
 	wp_reset_postdata();
 }
 
-
+/**
+ * The "meet" page is just about always unstyled... redirect to people if it exists.
+ */
+function uri_people_tool_redirect_archive() {
+	if( is_post_type_archive( 'people' ) ) {
+		$page = get_page_by_path( 'people' );
+		if( $page ) {
+			wp_safe_redirect( home_url ('/people') , 301 );
+			exit();
+		}
+	}
+}
+add_action( 'template_redirect', 'uri_people_tool_redirect_archive' );
 
 /**
  * Define the custom people post type
