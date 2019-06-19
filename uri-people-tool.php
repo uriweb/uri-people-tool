@@ -33,7 +33,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     // default attributes
     $attributes = shortcode_atts(array(
 			'group' => 'faculty', // slug, slug2, slug3
-			'id' => 0,
+			'id' => NULL,
 			'posts_per_page' => 200,
 			'thumbnail' => '',
 			'link' => TRUE, // link to the people post
@@ -101,8 +101,13 @@ function uri_people_tool_get_people($args) {
 		$default_args['posts_per_page'] = $args['posts_per_page'];
 	}
 
-	// we have a group, get its id and limit query to just the specified group
-	if ( $args['group'] ) {
+	if ( NULL !== $args['id'] && is_numeric( $args['id'] ) ) {
+		// we have an ID, get the person
+		$default_args['p'] = $args['id'];
+		//echo '<pre>',print_r($default_args, TRUE), '</pre>';
+	} else if ( ! empty( $args['group'] ) ) {
+		// we have a group, get its id and limit query to just the specified group
+		// @todo: accept a comma-separated list of groups
 		// get the term's id
 		$term_id = NULL;
 		$term = get_terms( 'peoplegroups', 'hide_empty=1&slug=' . sanitize_title( $args['group'] ) );
