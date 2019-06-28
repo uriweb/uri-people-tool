@@ -1,7 +1,6 @@
 <?php
 	get_header();
 ?>
-
 <main>
 	<article>
 

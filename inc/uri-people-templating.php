@@ -101,8 +101,12 @@ function uri_people_tool_template_loader( $template ) {
 	
 		// if it's a people page, then override $template with the custom one
 		// use "people" instead of "person" for backwards compatability.
-		$file = 'single-people.php';
-
+		if( is_embed() ) {
+			$file = 'embed-people.php';
+		} else {
+			$file = 'single-people.php';
+		}
+		
 		if ( file_exists( uri_people_tool_locate_template( $file ) ) ) {
 			$template = uri_people_tool_locate_template( $file );
 		}
