@@ -255,3 +255,6 @@ require_once dirname(__FILE__) . '/inc/uri-people-extend-search.php';
 
 // require the templating functions
 require_once dirname(__FILE__) . '/inc/uri-people-templating.php';
+
+// include the block editor files
+require_once dirname(__FILE__) . '/inc/blocks/blocks.php';
