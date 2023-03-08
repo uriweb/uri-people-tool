@@ -22,8 +22,8 @@ function uri_people_tool_add_block_patterns() {
 			'content'     => $pattern,
 			'description' => ( isset( $description ) ? $description : '' ),
 			'keywords'    => ( isset( $keywords ) ? $keywords : 'uri' ),
-			'categories'  => ( isset( $categories ) ? $categories : array( 'uri' ) ),
-		),
+			'categories'  => ( isset( $categories ) ? $categories : array( 'uri' ) )
+		)
 	);
 
 
