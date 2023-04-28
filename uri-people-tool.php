@@ -111,6 +111,13 @@ function uri_people_tool_get_people($args) {
 		// get the term's id
 		$term_id = NULL;
 		$term = get_terms( 'peoplegroups', 'hide_empty=1&slug=' . sanitize_title( $args['group'] ) );
+
+		// if the group doesn't exist, fail gracefully
+		if ( empty( $term ) ) {
+			return false;
+		}
+
+		// otherwise, let's get the id and do a query
 		$term_id = $term[0]->term_id;
 
 		$default_args['tax_query'] = array(
