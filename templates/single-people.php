@@ -11,6 +11,7 @@
 				<div class="entry">
 					<div class="whoimage"><?php the_post_thumbnail('people-big'); ?></div>
 					<ul class="wholist">
+						<?php if(get_field('peoplepronouns')) { ?><li><?php the_field('peoplepronouns'); ?></li><?php } ?>
 						<?php if(get_field('peopletitle')) { ?><li><?php the_field('peopletitle'); ?></li><?php } ?>
 						<?php if(get_field('peopledepartment')) { ?><li><?php the_field('peopledepartment'); ?></li><?php } ?>
 						<?php if(get_field('peoplephone')) { ?><li><strong class="screen-reader-text">Phone:</strong> <?php the_field('peoplephone'); ?></li><?php } ?>
@@ -51,6 +52,18 @@
 
 					<?php if(get_field('peopleurl')) { ?>
 						<p><strong>Personal website:</strong> <a href="<?php the_field('peopleurl'); ?>"><?php the_field('peopleurl'); ?></a></p>
+					<?php } ?>
+
+					<?php if(get_field('peoplegooglescholar')) { ?>
+						<p><strong>Google Scholar:</strong> <a href="<?php the_field('peoplegooglescholar'); ?>"><?php the_field('peoplegooglescholar'); ?></a></p>
+					<?php } ?>
+
+					<?php if(get_field('peopleresearchgate')) { ?>
+						<p><strong>ResearchGate:</strong> <a href="<?php the_field('peopleresearchgate'); ?>"><?php the_field('peopleresearchgate'); ?></a></p>
+					<?php } ?>
+
+					<?php if(get_field('peoplelookingforstudents')) { ?>
+						<p><strong>Looking for Students?:</strong> <?php the_field('peoplelookingforstudents'); ?></p>
 					<?php } ?>
 
 					<p><?php the_tags(); ?></p>
