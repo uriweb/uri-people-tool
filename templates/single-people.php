@@ -11,7 +11,6 @@
 				<div class="entry">
 					<div class="whoimage"><?php the_post_thumbnail('people-big'); ?></div>
 					<ul class="wholist">
-						<?php if(get_field('peoplepronouns')) { ?><li><?php the_field('peoplepronouns'); ?></li><?php } ?>
 						<?php if(get_field('peopletitle')) { ?><li><?php the_field('peopletitle'); ?></li><?php } ?>
 						<?php if(get_field('peopledepartment')) { ?><li><?php the_field('peopledepartment'); ?></li><?php } ?>
 						<?php if(get_field('peoplephone')) { ?><li><strong class="screen-reader-text">Phone:</strong> <?php the_field('peoplephone'); ?></li><?php } ?>

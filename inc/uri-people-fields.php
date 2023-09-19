@@ -77,15 +77,6 @@ if(function_exists('register_field_group')) {
 				'order_no' => '3',
 			),
 			array (
-				'label' => 'Pronouns',
-				'name' => 'peoplepronouns',
-				'type' => 'text',
-				'instructions' => '',
-				'required' => '0',
-				'key' => 'field_64f9ede6738a0',
-				'order_no' => '15',
-			),
-			array (
 				'label' => 'Office Location or Mailing Address',
 				'name' => 'peoplemail',
 				'type' => 'textarea',
@@ -151,7 +142,6 @@ if(function_exists('register_field_group')) {
 					'id' => '',
 				),
 				'choices' => array(
-					null => '--',
 					'M.S.' => 'M.S.',
 					'Ph.D.' => 'Ph.D.',
 					'Post doc' => 'Post doc',
