@@ -63,7 +63,7 @@
 					<?php } ?>
 
 					<?php if(get_field('peoplelookingforstudents')) { ?>
-						<p><strong>Looking for Students?:</strong> <?php the_field('peoplelookingforstudents'); ?></p>
+						<p><strong>Accepting Students:</strong> <?php the_field('peoplelookingforstudents'); ?></p>
 					<?php } ?>
 
 					<p><?php the_tags(); ?></p>
