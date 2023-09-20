@@ -61,9 +61,15 @@
 						<p><strong>ResearchGate:</strong> <a href="<?php the_field('peopleresearchgate'); ?>"><?php the_field('peopleresearchgate'); ?></a></p>
 					<?php } ?>
 
-					<?php if(get_field('peoplelookingforstudents')) { ?>
-						<p><strong>Accepting Students:</strong> <?php the_field('peoplelookingforstudents'); ?></p>
+					<?php if(get_field('peopleacceptingstudents')=== 'Yes') { ?>
+						<p><strong>Accepting Students:</strong> <?php the_field('peopletypestudent'); ?></p>
 					<?php } ?>
+					
+					<?php if(get_field('peopleacceptingstudents')=== 'Not at this time') { ?>
+						<p><strong>Accepting Students:</strong> <?php the_field('peopleacceptingstudents'); ?></p>
+					<?php } ?>
+
+					
 
 					<p><?php the_tags(); ?></p>
 
