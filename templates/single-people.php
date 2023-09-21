@@ -61,11 +61,15 @@
 						<p><strong>ResearchGate:</strong> <a href="<?php the_field('peopleresearchgate'); ?>"><?php the_field('peopleresearchgate'); ?></a></p>
 					<?php } ?>
 
-					<?php if(get_field('peopleacceptingstudents')=== 'Yes') { ?>
+					<?php if(get_field('peopleacceptingstudents') === 'Yes' && get_field('peopletypestudent')) { ?>
 						<p><strong>Accepting Students:</strong> <?php the_field('peopletypestudent'); ?></p>
 					<?php } ?>
-					
-					<?php if(get_field('peopleacceptingstudents')=== 'Not at this time') { ?>
+
+					<?php if(get_field('peopleacceptingstudents') === 'Yes' and !get_field('peopletypestudent') ) { ?>
+						<p><strong>Accepting Students:</strong> <?php the_field('peopleacceptingstudents'); ?></p>
+					<?php } ?>
+
+					<?php if(get_field('peopleacceptingstudents') === 'Not at this time') { ?>
 						<p><strong>Accepting Students:</strong> <?php the_field('peopleacceptingstudents'); ?></p>
 					<?php } ?>
 

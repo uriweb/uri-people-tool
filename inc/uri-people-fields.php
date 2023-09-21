@@ -155,11 +155,11 @@ if(function_exists('register_field_group')) {
 		),
 		array(
 			'key' => 'field_6509ccd835b2b',
-			'label' => 'Type of Student',
+			'label' => 'Student Type',
 			'name' => 'peopletypestudent',
 			'aria-label' => '',
 			'type' => 'select',
-			'instructions' => '',
+			'instructions' => 'Select the type(s) of accepted students',
 			'required' => 0,
 			'conditional_logic' => array(
 				array(
@@ -176,7 +176,7 @@ if(function_exists('register_field_group')) {
 				'id' => '',
 			),
 			'choices' => array(
-				'M.S.' => 'M.S.',
+				'Master\'s' => 'Master\'s',
 				'Ph.D.' => 'Ph.D.',
 				'Post Doc' => 'Post Doc',
 			),
