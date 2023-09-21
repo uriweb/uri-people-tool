@@ -18,9 +18,20 @@
 	
 	// uncomment the below to add website after phone and email
 	if( $args['website'] === TRUE && get_field('peopleurl') ) {
-		$misc[] = '<span class="u-url"><a href="' . get_field('peopleurl') . '">website</a></p>';
+		$misc[] = '<span class="u-url"><a href="' . get_field('peopleurl') . '">website</a>';
 	}
 
+	if( $args['accepting_students'] === TRUE && get_field('peopleacceptingstudents') === 'Not at this time') {
+		$misc[] = '<span class="u-accepting-students">Accepting Students: ' . get_field('peopleacceptingstudents') . '</span>';
+	}
+
+	if( $args['accepting_students'] === TRUE && get_field('peopletypestudent')) {
+		$misc[] = '<span class="u-accepting-students">Accepting Students: ' . implode(' , ', get_field('peopletypestudent')) . '</span></p>';
+	}
+
+	if( $args['accepting_students'] === TRUE && get_field('peopleacceptingstudents') === 'Yes' && !get_field('peopletypestudent')) {
+		$misc[] = '<span class="u-accepting-students">Accepting Students: ' . get_field('peopleacceptingstudents') . '</span></p>';
+	}
 	$misc = implode( ' &ndash; ', $misc );
 	
 

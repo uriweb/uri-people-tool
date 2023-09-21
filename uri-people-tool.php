@@ -42,6 +42,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
 			'department' => TRUE, // display the person's phone
 			'address' => FALSE, // display the person's website
 			'website' => FALSE, // display the person's website
+			'accepting_students' => FALSE, // display the person's accepting students info
 			'before' => '<div class="uri-people-tool">',
 			'after' => '</div>',
     ), $attributes, $shortcode);
@@ -54,7 +55,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     }
 
     // check the shortcode attributes for boolean trues, and convert from default if necessary
-    foreach( array('address', 'website') as $value ) {
+    foreach( array('address', 'website', 'accepting_students') as $value ) {
 			if( strtolower( $attributes[$value] ) == 'true' ) {
 				$attributes[$value] = TRUE;
 			}
