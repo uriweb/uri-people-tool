@@ -40,6 +40,9 @@ Display a list of all people without links to people posts:
 
 ```[uri-people-tool link="false"]```
 
+Display a list of all people with the Accepting Student field information:
+
+```[uri-people-tool accepting_students="true"]```
 
 ## Theming the output
 
@@ -49,6 +52,6 @@ Edit the files in your theme to taste.
 
 ## Plugin Details
 
-Contributors: John Pennypacker, Brandon Fuller  
+Contributors: John Pennypacker, Brandon Fuller, Alexandra Gauss
 Tags: posts, people  
 
