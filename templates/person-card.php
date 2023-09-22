@@ -22,17 +22,17 @@
 	}
 
 	if( $args['accepting_students'] === TRUE && get_field('peopleacceptingstudents') === 'Not at this time') {
-		$misc[] = '<span class="u-accepting-students">Accepting Students: ' . get_field('peopleacceptingstudents') . '</span>';
+		$misc[] = '<span class="u-accepting-not students-no">Accepting Students: ' . get_field('peopleacceptingstudents') . '</span>';
 	}
 
 	if( $args['accepting_students'] === TRUE && get_field('peopletypestudent')) {
-		$misc[] = '<span class="u-accepting-students">Accepting Students: ' . implode(' , ', get_field('peopletypestudent')) . '</span></p>';
+		$misc[] = '<span class="u-accepting-type students-type">Accepting Students: ' . implode(' , ', get_field('peopletypestudent')) . '</span></p>';
 	}
 
 	if( $args['accepting_students'] === TRUE && get_field('peopleacceptingstudents') === 'Yes' && !get_field('peopletypestudent')) {
-		$misc[] = '<span class="u-accepting-students">Accepting Students: ' . get_field('peopleacceptingstudents') . '</span></p>';
+		$misc[] = '<span class="u-accepting-students students-yes">Accepting Students: ' . get_field('peopleacceptingstudents') . '</span></p>';
 	}
-	$misc = implode( ' &ndash; ', $misc );
+	$misc = implode( ' <br> ', $misc );
 	
 
 ?><div class="peopleitem h-card <?php if ( $has_thumbnail ) { echo 'has-thumbnail'; } ?>">
