@@ -3,7 +3,7 @@
 Plugin Name: URI People Tool
 Plugin URI: 
 Description: Create custom people post type for WordPress Department Sites
-Version: 1.4
+Version: 1.5
 Author: URI Web Communications
 Author URI: 
 */
@@ -42,6 +42,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
 			'department' => TRUE, // display the person's phone
 			'address' => FALSE, // display the person's website
 			'website' => FALSE, // display the person's website
+			'accepting_students' => FALSE, // display the person's accepting students info
 			'before' => '<div class="uri-people-tool">',
 			'after' => '</div>',
     ), $attributes, $shortcode);
@@ -54,7 +55,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
     }
 
     // check the shortcode attributes for boolean trues, and convert from default if necessary
-    foreach( array('address', 'website') as $value ) {
+    foreach( array('address', 'website', 'accepting_students') as $value ) {
 			if( strtolower( $attributes[$value] ) == 'true' ) {
 				$attributes[$value] = TRUE;
 			}
@@ -111,6 +112,13 @@ function uri_people_tool_get_people($args) {
 		// get the term's id
 		$term_id = NULL;
 		$term = get_terms( 'peoplegroups', 'hide_empty=1&slug=' . sanitize_title( $args['group'] ) );
+
+		// if the group doesn't exist, fail gracefully
+		if ( empty( $term ) ) {
+			return false;
+		}
+
+		// otherwise, let's get the id and do a query
 		$term_id = $term[0]->term_id;
 
 		$default_args['tax_query'] = array(

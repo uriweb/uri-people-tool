@@ -18,10 +18,21 @@
 	
 	// uncomment the below to add website after phone and email
 	if( $args['website'] === TRUE && get_field('peopleurl') ) {
-		$misc[] = '<span class="u-url"><a href="' . get_field('peopleurl') . '">website</a></p>';
+		$misc[] = '<span class="u-url"><a href="' . get_field('peopleurl') . '">website</a>';
 	}
 
-	$misc = implode( ' &ndash; ', $misc );
+	if( $args['accepting_students'] === TRUE && get_field('peopleacceptingstudents') === 'Not at this time') {
+		$misc[] = '<span class="u-accepting-not students-no">Accepting Students: ' . get_field('peopleacceptingstudents') . '</span>';
+	}
+
+	if( $args['accepting_students'] === TRUE && get_field('peopletypestudent')) {
+		$misc[] = '<span class="u-accepting-type students-type">Accepting Students: ' . implode(' , ', get_field('peopletypestudent')) . '</span></p>';
+	}
+
+	if( $args['accepting_students'] === TRUE && get_field('peopleacceptingstudents') === 'Yes' && !get_field('peopletypestudent')) {
+		$misc[] = '<span class="u-accepting-students students-yes">Accepting Students: ' . get_field('peopleacceptingstudents') . '</span></p>';
+	}
+	$misc = implode( ' <br> ', $misc );
 	
 
 ?><div class="peopleitem h-card <?php if ( $has_thumbnail ) { echo 'has-thumbnail'; } ?>">

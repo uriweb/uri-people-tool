@@ -53,6 +53,28 @@
 						<p><strong>Personal website:</strong> <a href="<?php the_field('peopleurl'); ?>"><?php the_field('peopleurl'); ?></a></p>
 					<?php } ?>
 
+					<?php if(get_field('peoplegooglescholar')) { ?>
+						<p><strong>Google Scholar:</strong> <a href="<?php the_field('peoplegooglescholar'); ?>"><?php the_field('peoplegooglescholar'); ?></a></p>
+					<?php } ?>
+
+					<?php if(get_field('peopleresearchgate')) { ?>
+						<p><strong>ResearchGate:</strong> <a href="<?php the_field('peopleresearchgate'); ?>"><?php the_field('peopleresearchgate'); ?></a></p>
+					<?php } ?>
+
+					<?php if(get_field('peopleacceptingstudents') === 'Yes' && get_field('peopletypestudent')) { ?>
+						<p><strong>Accepting Students:</strong> <?php the_field('peopletypestudent'); ?></p>
+					<?php } ?>
+
+					<?php if(get_field('peopleacceptingstudents') === 'Yes' and !get_field('peopletypestudent') ) { ?>
+						<p><strong>Accepting Students:</strong> <?php the_field('peopleacceptingstudents'); ?></p>
+					<?php } ?>
+
+					<?php if(get_field('peopleacceptingstudents') === 'Not at this time') { ?>
+						<p><strong>Accepting Students:</strong> <?php the_field('peopleacceptingstudents'); ?></p>
+					<?php } ?>
+
+					
+
 					<p><?php the_tags(); ?></p>
 
 				</div>
