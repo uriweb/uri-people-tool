@@ -37,6 +37,7 @@ function uri_people_tool_shortcode($attributes, $content, $shortcode) {
 			'posts_per_page' => 200,
 			'thumbnail' => '',
 			'link' => TRUE, // link to the people post
+			'credentials' => TRUE, // display the person's credentials / degrees
 			'email' => TRUE, // display the person's email
 			'phone' => TRUE, // display the person's phone
 			'department' => TRUE, // display the person's phone
