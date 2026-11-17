@@ -30,6 +30,17 @@ if(function_exists('register_field_group')) {
 				'default_value' => '',
 				'formatting' => 'none',
 				'key' => 'field_sortname',
+				'order_no' => '-2',
+			),
+			array (
+				'label' => 'Degree Credentials',
+				'name' => 'peoplecredentials',
+				'type' => 'text',
+				'instructions' => 'This field will display with the person\'s name.',
+				'required' => '0',
+				'default_value' => '',
+				'formatting' => 'none',
+				'key' => 'field_credentials',
 				'order_no' => '-1',
 			),
 			array (
